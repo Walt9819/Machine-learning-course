@@ -43,3 +43,40 @@ population / 1000
 ##For using NumPy library
 import numpy as np
 np.log(population)
+
+##Select from dataframes the ones with specific criteria
+population.apply(lambda val : val > 1000000)
+
+##Adding columns to dataframes
+cities['Area square miles'] = pd.Series([46.87, 176.53, 97.92]) 
+cities['Population density'] = cities['Population'] / cities['Area square miles']
+cities
+
+
+###########First excersice (Create two new boolean columns, one if the 
+##city has "San" and other if the square area is greater than 50 miles)
+
+##Has "San" on city name
+cities['San on city'] = cities['City name'].apply(lambda name: name.startswith("San")) 
+cities
+#Square area greater than 50 miles
+cities['Area greater'] = cities ['Area square miles'].apply(lambda val : val > 50) 
+cities
+
+#If combine both instructions use "&" instead of "and"
+cities['Is wide and have San on name'] = cities['City name'].apply(lambda name: name.startswith("San")) & cities ['Area square miles'].apply(lambda val : val > 50)
+cities
+
+
+##########Index with pandas
+city_names.index
+cities.index
+
+##Give manually an index place to the given data
+cities.reindex([2, 0, 1])
+##Reindex with random from numpy
+cities.reindex(np.random.permutation(cities.index))
+
+
+##########Second excercise (Try to give index values that wasn´t on the original index values)
+cities.reindex([4, 2, 8])
